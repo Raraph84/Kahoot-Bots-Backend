@@ -1,0 +1,14 @@
+{
+  "name": "kahoot-bots-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "Raraph84",
+  "license": "MIT",
+  "dependencies": {
+    "openai": "^4.25.0",
+    "puppeteer": "^21.7.0",
+    "raraph84-lib": "^2.17.0"
+  }
+}
