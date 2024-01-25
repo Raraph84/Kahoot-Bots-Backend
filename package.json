@@ -1,9 +1,11 @@
 {
   "name": "kahoot-bots-backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "A self-hosted website to make Kahoot Bots and ask automatically to ChatGPT the answer",
   "main": "index.js",
-  "keywords": [],
+  "keywords": [
+    "kahoot"
+  ],
   "author": "Raraph84",
   "license": "MIT",
   "dependencies": {
