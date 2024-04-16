@@ -45,6 +45,8 @@ events.send = (message) => process.stdout.write(JSON.stringify(message) + "\n");
             return;
         }
 
+        // for (const message of messages) console.log("->", message);
+
         for (const message of messages)
             websocketEvents.emit("sent", message);
     });
@@ -56,6 +58,8 @@ events.send = (message) => process.stdout.write(JSON.stringify(message) + "\n");
         } catch (error) {
             return;
         }
+
+        // for (const message of messages) console.log("<-", message);
 
         for (const message of messages)
             websocketEvents.emit("received", message);
@@ -157,12 +161,12 @@ events.send = (message) => process.stdout.write(JSON.stringify(message) + "\n");
         if (message.data.id === 1) {
 
             state = "asking";
-            if (!["CLASSIC", "TRUE_FALSE"].includes(content.layout)) return;
+            if (content.layout && !["CLASSIC", "TRUE_FALSE"].includes(content.layout)) return;
 
             const question = content.title;
             const answers = content.choices?.map((choice) => choice.answer);
 
-            events.send({ event: "question", type: content.layout === "CLASSIC" ? "classic" : "truefalse", answersCount: content.numberOfChoices, allowedAnswers: content.numberOfAnswersAllowed, question, answers });
+            events.send({ event: "question", type: content.layout === "TRUE_FALSE" ? "truefalse" : "classic", answersCount: content.numberOfChoices, allowedAnswers: content.numberOfAnswersAllowed, question, answers });
 
             events.on("message", (message) => {
 

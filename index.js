@@ -78,6 +78,7 @@ class Bot extends EventEmitter {
                 this.emit("rawMessage", message);
             }
         });
+        // this.#proc.stdout.pipe(process.stdout);
         this.#proc.stderr.pipe(process.stderr);
 
         this.on("rawMessage", (message) => {
@@ -188,6 +189,7 @@ const initPlayBot = (bot) => {
         }
     });
     bot.on("end", (correct) => {
+        if (!question) return;
         question.correct = correct;
         question.askingChatGpt = false;
         sendState();
