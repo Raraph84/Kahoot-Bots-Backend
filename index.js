@@ -73,7 +73,7 @@ class Bot extends EventEmitter {
                 try {
                     message = JSON.parse(line);
                 } catch (error) {
-                    return;
+                    continue;
                 }
                 this.emit("rawMessage", message);
             }
