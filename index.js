@@ -166,7 +166,7 @@ const initPlayBot = (bot) => {
                             ...answers.map((answer, index) => "Réponse " + (index + 1) + " : " + answer)
                         ].join("\n")
                     }
-                ], model: "gpt-3.5-turbo"
+                ], model: "gpt-4-turbo"
             });
 
             let answer;
