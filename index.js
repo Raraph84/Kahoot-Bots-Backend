@@ -157,6 +157,7 @@ const initPlayBot = (bot) => {
             console.log("Question : " + q);
 
             const completion = await openai.chat.completions.create({
+                model: "gpt-4o",
                 messages: [
                     prompt,
                     {
@@ -166,7 +167,7 @@ const initPlayBot = (bot) => {
                             ...answers.map((answer, index) => "Réponse " + (index + 1) + " : " + answer)
                         ].join("\n")
                     }
-                ], model: "gpt-4-turbo"
+                ]
             });
 
             let answer;
