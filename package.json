@@ -9,8 +9,8 @@
   "author": "Raraph84",
   "license": "MIT",
   "dependencies": {
-    "openai": "^4.53.1",
-    "puppeteer": "^22.14.0",
-    "raraph84-lib": "^2.19.0"
+    "openai": "^6.10.0",
+    "puppeteer": "^24.33.0",
+    "raraph84-lib": "^2.21.0"
   }
 }

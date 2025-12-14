@@ -44,7 +44,7 @@ const sendState = () => {
     }));
     if (JSON.stringify(newState) === JSON.stringify(lastState)) return;
     lastState = newState;
-    server.clients.filter((client) => client.infos.logged).forEach((client) => client.emitEvent("STATE", newState));
+    server.clients.filter((client) => client.metadata.logged).forEach((client) => client.emitEvent("STATE", newState));
 }
 
 class Bot extends EventEmitter {
@@ -211,7 +211,7 @@ const addBot = (name) => {
     });
     bot.on("a2f", () => sendState());
     bot.on("a2ffail", () => sendState());
-    bot.on("a2freset", () => { sendState(); server.clients.filter((client) => client.infos.logged).forEach((client) => client.emitEvent("A2F_RESET")); });
+    bot.on("a2freset", () => { sendState(); server.clients.filter((client) => client.metadata.logged).forEach((client) => client.emitEvent("A2F_RESET")); });
     bot.on("joined", () => sendState());
     bot.on("exit", () => sendState());
     return bot;
@@ -220,7 +220,7 @@ const addBot = (name) => {
 const server = new WebSocketServer();
 server.on("connection", (/** @type {import("raraph84-lib/src/WebSocketClient")} */ client) => {
     setTimeout(() => {
-        if (!client.infos.logged)
+        if (!client.metadata.logged)
             client.close("Please login");
     }, 10 * 1000);
 });
@@ -243,13 +243,13 @@ server.on("command", (command, /** @type {import("raraph84-lib/src/WebSocketClie
             return;
         }
 
-        client.infos.logged = true;
+        client.metadata.logged = true;
         client.emitEvent("LOGGED");
         client.emitEvent("STATE", lastState);
 
     } else if (command === "SET_CODE") {
 
-        if (!client.infos.logged) {
+        if (!client.metadata.logged) {
             client.close("Please login");
             return;
         }
@@ -283,7 +283,7 @@ server.on("command", (command, /** @type {import("raraph84-lib/src/WebSocketClie
 
     } else if (command === "ADD_BOT") {
 
-        if (!client.infos.logged) {
+        if (!client.metadata.logged) {
             client.close("Please login");
             return;
         }
@@ -305,7 +305,7 @@ server.on("command", (command, /** @type {import("raraph84-lib/src/WebSocketClie
 
     } else if (command === "A2F") {
 
-        if (!client.infos.logged) {
+        if (!client.metadata.logged) {
             client.close("Please login");
             return;
         }
@@ -354,7 +354,7 @@ server.on("command", (command, /** @type {import("raraph84-lib/src/WebSocketClie
 
     } else if (command === "ANSWER") {
 
-        if (!client.infos.logged) {
+        if (!client.metadata.logged) {
             client.close("Please login");
             return;
         }
@@ -392,7 +392,7 @@ server.on("command", (command, /** @type {import("raraph84-lib/src/WebSocketClie
 
     } else if (command === "REMOVE_BOT") {
 
-        if (!client.infos.logged) {
+        if (!client.metadata.logged) {
             client.close("Please login");
             return;
         }
